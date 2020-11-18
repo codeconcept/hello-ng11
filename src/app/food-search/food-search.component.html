@@ -4,7 +4,17 @@
   <input type="text" name="ingredients" [(ngModel)]="ingredients" />
   <button type="submit">search recipes</button>
 </form>
-
-<div *ngIf="recipes$ | async">
-  {{ recipes$ | async | json }}
+<div class="result">
+  <div *ngIf="recipes$ | async" >
+    <div *ngFor="let r of recipes$ | async" class="recipe">
+      <h3>{{ r.title }}</h3>
+      <img [src]="r.image" />
+      <ul>
+        <li *ngFor="let ing of r.usedIngredients">
+          {{ ing.original }}
+        </li>
+      </ul>
+      <!-- {{ r | json }} -->
+    </div>
+  </div>
 </div>

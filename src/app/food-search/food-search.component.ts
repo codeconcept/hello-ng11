@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { Recipe } from '../models/recipe';
 import { SpoonService } from '../services/spoon.service';
 
 @Component({
@@ -9,7 +11,7 @@ import { SpoonService } from '../services/spoon.service';
 })
 export class FoodSearchComponent implements OnInit {
   ingredients = 'tomato, bread flouer';
-  recipes$;
+  recipes$: Observable<Recipe[]> = null;
 
   constructor(private spoonService: SpoonService) {}
 

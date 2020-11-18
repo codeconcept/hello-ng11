@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { spoonacularKey } from './apiKeys.js';
+import { Observable } from 'rxjs';
+import { Recipe } from '../models/recipe.js';
 
 @Injectable({
   providedIn: 'root',
@@ -10,15 +12,16 @@ export class SpoonService {
 
   constructor(private http: HttpClient) {}
 
-  getRecipeByIngredients(ingredients: string) {
-    const allIngredients = ingredients.split(',').map((ing) => ing + '%2C').join('');
+  getRecipeByIngredients(ingredients: string): Observable<Recipe[]> {
+    const allIngredients = ingredients
+      .split(',')
+      .map((ing) => ing + '%2C')
+      .join('');
     const fullURL = `${this.URL}/recipes/findByIngredients?number=5&ranking=1&ingredients=${allIngredients}&apiKey=${spoonacularKey}`;
 
     const headers = new HttpHeaders({
       Accept: 'application/json',
     });
-    // headers.set('X-RapidAPI-Key', spoonacularKey);
-    console.log(spoonacularKey, fullURL, allIngredients);
-    return this.http.get<any>(fullURL, { headers });
+    return this.http.get<Recipe[]>(fullURL, { headers });
   }
 }

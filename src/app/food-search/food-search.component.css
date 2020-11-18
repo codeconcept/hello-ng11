@@ -1,0 +1,19 @@
+.result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.recipe {
+  border: 4px solid green;
+  width: 24em;
+  height: 30em;
+  margin: 10px;
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+}
